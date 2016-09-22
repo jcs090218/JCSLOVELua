@@ -1,0 +1,5 @@
+# Don't add the resource file.
+/data
+
+# Don't add the test file.
+/main.lua
