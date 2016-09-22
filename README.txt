@@ -3,10 +3,10 @@ $File: README.txt $
 $Creator: Jen-Chieh Shen <jcs090218@gmail.com> $
 $Date: 2016-09-02 $
 $Revision: 0.0.1 $
-$Version Control Page: $
+$Version Control Page: https://github.com/jcs090218/JCSLOVELua_Framework.git $
 $Notice: See LICENSE.txt for modification and distribution information 
                   Copyright (c) 2016 by Shen, Jen-Chieh $
 ========================================================================
 
 
-    
+   Love 2D Framework - JenChieh 
