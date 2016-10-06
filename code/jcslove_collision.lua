@@ -148,6 +148,7 @@ function jcslove_collision.PointDistance(pointA, pointB)
 end
 
 ------------------------------------------------
+--
 ------------------------------------------------
 function jcslove_collision.OneDimension(a, b)
    return math.abs(a - b)

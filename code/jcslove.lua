@@ -21,6 +21,7 @@ require (_PACKAGE .. '/jcslove_scene')
 require (_PACKAGE .. '/jcslove_scenemanager')
 require (_PACKAGE .. '/jcslove_collisionmanager')
 require (_PACKAGE .. '/jcslove_camera')
+require (_PACKAGE .. '/jcslove_soundmanager')
 
 -- device utilities
 require (_PACKAGE .. '/jcslove_spriteloader')
@@ -29,6 +30,7 @@ require (_PACKAGE .. '/jcslove_color')
 require (_PACKAGE .. '/jcslove_debug')
 require (_PACKAGE .. '/jcslove_window')
 require (_PACKAGE .. '/jcslove_math')
+require (_PACKAGE .. '/jcslove_physics')
 require (_PACKAGE .. '/jcslove_util')
 require (_PACKAGE .. '/jcslove_input')
 
@@ -37,6 +39,7 @@ require (_PACKAGE .. '/jcslove_gameobject')
 require (_PACKAGE .. '/jcslove_sprite')
 require (_PACKAGE .. '/jcslove_animation')
 require (_PACKAGE .. '/jcslove_shape')
+require (_PACKAGE .. '/jcslove_animator')
 
 ------------------------------------------------
 -- Global initialize function for framework

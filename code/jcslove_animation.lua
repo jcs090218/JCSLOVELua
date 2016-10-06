@@ -10,6 +10,7 @@
 
 local _PACKAGE = (...):match("^(.+)[%./][^%./]+") or ""
 require (_PACKAGE .. '/jcslove_spriteloader')
+require (_PACKAGE .. '/jcslove_sprite')
 require (_PACKAGE .. '/jcslove_debug')
 
 
@@ -18,13 +19,13 @@ jcslove_animation =
       x = 0,  -- animation position x
       y = 0,  -- animation position y
 
-      frame = 0,  -- current frame we are rendering
+      frame = 1,  -- current frame we are rendering
       frameCount = 0,  -- total frame count
 
       timer = 0,
       timePerFrame = 0.1,   -- time for each frame to render
 
-      sprites = {},   -- sequence of sprite
+      sprites = nil,   -- sequence of sprite
       loop = true,   -- loop the animation or not?
 
       gameObject = nil,
@@ -49,6 +50,7 @@ function jcslove_animation.new(init, gameObject)
    setmetatable(newAnim, jcslove_animation)
 
    newAnim.gameObject = gameObject
+   newAnim.sprites = {}
 
    return newAnim
 end
@@ -60,7 +62,7 @@ function jcslove_animation:update(dt)
 
    -- Do not increse the frame count,
    -- if the animation is pause.
-   if pause == false then
+   if self.pause == true then
       return
    end
 
@@ -78,10 +80,10 @@ function jcslove_animation:update(dt)
    -- reset self.timer
    self.timer = 0
    -- reset frame back to zero.
-   if self.frame >= self.frameCount and
+   if self.frame > self.frameCount and
       self.loop == true
    then
-      self.frame = 0
+      self.frame = 1
    end
 
 end
@@ -93,17 +95,11 @@ function jcslove_animation:draw()
 
 
    -- frame count check.
-   if self.frame >= self.frameCount then
+   if self.frame > self.frameCount then
       return
    end
 
-   -- NOTE(JenChieh):
-   -- render.position = animation.position + gameobject.position
-
-   love.graphics.draw(
-      self.sprites[self.frame],
-      self.x + self.gameObject.x,
-      self.y + self.gameObject.y)
+   self.sprites[self.frame]:draw()
 end
 
 ------------------------------------------------
@@ -119,10 +115,12 @@ function jcslove_animation:CreateSpriteSequence(filePath, baseName, ext, frameCo
 
    self.frameCount = frameCount
 
-   for index = 0, frameCount - 1 do
-      local bn = filePath .. baseName .. index .. ext;
+   for index = 1, frameCount do
+      local bn = filePath .. baseName .. (index - 1) .. ext;
 
-      self.sprites[index] = jcslove_spriteloader.LoadSprite(bn)
+      local tempSprite = jcslove_spriteloader.LoadSprite(bn)
+      self.sprites[index] = jcslove_sprite:new(self.gameObject)
+      self.sprites[index]:SetSprite(tempSprite)
    end
 
 end
@@ -136,13 +134,13 @@ end
 function jcslove_animation:PlayOneShot()
 
    -- reset frame
-   self.frame = 0
+   self.frame = 1
 
    -- reset self.timer
    self.timer = 0
 
    -- Lastly, play the animation.
-   jcslove_animation:Play()
+   self:Play()
 end
 
 ------------------------------------------------
@@ -151,7 +149,7 @@ end
 function jcslove_animation:Pause()
    -- make render equl to false,
    -- will make the animation stop render.
-   pause = true
+   self.pause = true
 end
 
 ------------------------------------------------
@@ -159,5 +157,41 @@ end
 ------------------------------------------------
 function jcslove_animation:Play()
    -- start the animation.
-   pause = false
+   self.pause = false
+end
+
+------------------------------------------------
+-- Auto set the pivot to center
+--
+-- NOTE(jenchieh): only when the sprite are
+-- right left or top down the same will be
+-- good to use of this function call.
+------------------------------------------------
+function jcslove_animation:AutoPivot()
+
+   -- Loop through all the sprite and set the pivot
+   for index = 1, self.frameCount do
+      self.sprites[index]:AutoPivot()
+   end
+
+end
+
+------------------------------------------------
+-- Flip X all the sprite in this animation?
+------------------------------------------------
+function jcslove_animation:FlipX(act)
+   -- Loop through all the sprite and set the flipX
+   for index = 1, self.frameCount do
+      self.sprites[index].flipX = act
+   end
+end
+
+------------------------------------------------
+-- Flip Y all the sprite in this animation?
+------------------------------------------------
+function jcslove_animation:FlipY(act)
+   -- Loop through all the sprite and set the flipY
+   for index = 1, self.frameCount do
+      self.sprites[index].flipY = act
+   end
 end

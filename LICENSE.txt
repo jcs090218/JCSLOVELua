@@ -1,7 +1,7 @@
 License information
 
  *******************************************************************
- *                  JCSLOVELua_Framework Version 0.6.9
+ *                  JCSLOVELua_Framework Version 1.2.7
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *              Copyright (c) 2016 by Jen-Chieh Shen
  *******************************************************************
@@ -25,11 +25,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ======
 
-(*) Following Listed Files/Directories/Filters have there own individual 
+(*) Following Listed Files/Directories/Filters have there own individual
    license. Therefore they do not fall under this license.
 
         - 'lib' folder
 
-(**) 
+(**)
 Jen-Chieh's email is jcs090218@gmail.com
-

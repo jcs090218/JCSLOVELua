@@ -104,9 +104,9 @@ end
 ------------------------------------------------
 -- @param sceneName: name of the scene
 ------------------------------------------------
-function jcslove_scenemanager:SwitchScene(sceneName)
+-- function jcslove_scenemanager:SwitchScene(sceneName)
 
-end
+-- end
 
 ------------------------------------------------
 -- Switch the scene by passing the scene pointer.
@@ -135,10 +135,12 @@ function jcslove_scenemanager:SwitchScene(sceneObj)
       -- set the scene directly, probably the first time
       -- assign the scene.
       g_currentScene = sceneObj
-      g_fadeState = "fadein"
+
+      -- TEMPORARY(jenchieh): weird bug...
+      --g_fadeState = "fadein"
    end
 
-   -- -- record down the scene
+   -- record down the scene
    g_backScene = sceneObj
    g_loadScene = true
 
@@ -150,7 +152,7 @@ end
 ------------------------------------------------
 -- @param sceneObj: scene load into buffer.
 ------------------------------------------------
-function jcslove_scenemanager:Add(sceneObj)
+function jcslove_scenemanager:add(sceneObj)
 
    -- add the renderable object in to queue
    self.scenes[self.length] = sceneObj
@@ -174,18 +176,25 @@ function jcslove_scenemanager:FadeScene(tp, dt)
       return
    end
 
+   -- Stop the sound
+   local soundmanager = jcslove_soundmanager:GetInstance()
+
    -- count the alpha is empty
-   local renderObjCounter = 0
    local interfaceCounter = 0
 
    -- do fade out
    if tp == "fadeout" then
+
+      -- Fadout the sound
+      soundmanager:SetBGMVolume(soundmanager.bgm_volume - dt)
 
       for index = 1, g_currentScene.length do
 
          -- Get the interface in the current
          -- rendering scene
          local interface = g_currentScene.interfaces[index]
+
+         local renderObjCounter = 0
 
          for innerIndex = 1, interface.length do
             -- get the renderobject in the interface
@@ -194,11 +203,10 @@ function jcslove_scenemanager:FadeScene(tp, dt)
             -- minus the alpha by time
             renderObj.color.a = renderObj.color.a - (dt * g_fadeSpeed)
 
-
-
             -- add one to counter
             if renderObj.color.a <= 0 then
                renderObjCounter = renderObjCounter + 1
+               renderObj.color.a = 0
             end
          end
 
@@ -225,7 +233,32 @@ function jcslove_scenemanager:FadeScene(tp, dt)
             -- fade in again
             g_fadeState = "fadein"
 
-            g_loadScene = false
+
+            -- turn all color alpha to zero
+            for index = 1, g_currentScene.length do
+
+               -- Get the interface in the current
+               -- rendering scene
+               local interface = g_currentScene.interfaces[index]
+
+               for innerIndex = 1, interface.length do
+                  -- get the renderobject in the interface
+                  local renderObj = interface.renderObjects[innerIndex]
+
+                  -- minus the alpha by time
+                  renderObj.color.a = 0
+               end -- end innerIndex loop
+            end -- end index loop
+
+
+            -- switch the back buffer to current buffer
+            -- and play it!
+            soundmanager:SwitchBackBuffer()
+
+            -- Reset our camera
+            local camera = jcslove_camera:GetInstance()
+            camera:SetPositionXY(0, 0)
+            
          end
 
       end
@@ -233,11 +266,16 @@ function jcslove_scenemanager:FadeScene(tp, dt)
       -- do fade in
    elseif tp == "fadein" then
 
+      -- Fade in the sound
+      soundmanager:SetBGMVolume(soundmanager.bgm_volume + dt)
+
       for index = 1, g_currentScene.length do
 
          -- Get the interface in the current
          -- rendering scene
          local interface = g_currentScene.interfaces[index]
+
+         local renderObjCounter = 0
 
          for innerIndex = 1, interface.length do
             -- get the renderobject in the interface
@@ -249,6 +287,7 @@ function jcslove_scenemanager:FadeScene(tp, dt)
             -- add one to counter
             if renderObj.color.a >= 255 then
                renderObjCounter = renderObjCounter + 1
+               renderObj.color.a = 255
             end
          end
 
@@ -256,17 +295,18 @@ function jcslove_scenemanager:FadeScene(tp, dt)
          -- interface is completely visible.
          if renderObjCounter == interface.length then
             interfaceCounter = interfaceCounter + 1
-
          end
       end
 
-
       -- check the counter and interface visible or not?
       if interfaceCounter == g_currentScene.length then
-         -- Every interface is invisible now!
+         -- Every interface is visible now!
 
          -- change the state
          g_fadeState = "empty"
+
+         -- done loading scene
+         g_loadScene = false
       end
 
    elseif tp == "empty" then
@@ -275,4 +315,13 @@ function jcslove_scenemanager:FadeScene(tp, dt)
       jcslove_debug.Error("Fade in/out pass in the wrong type...")
    end
 
+end
+
+------------------------------------------------
+-- Return Current Scene Object
+------------------------------------------------
+-- @return sceneObj: return current scene object.
+------------------------------------------------
+function jcslove_scenemanager.GetCurrentScene()
+   return g_currentScene
 end

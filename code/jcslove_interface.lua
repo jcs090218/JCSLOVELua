@@ -12,6 +12,10 @@
 -- * Equals to one sorting order cost one
 --  batch for one interface.
 
+local _PACKAGE = (...):match("^(.+)[%./][^%./]+") or ""
+require (_PACKAGE .. '/jcslove_debug')
+require (_PACKAGE .. '/jcslove_camera')
+
 
 jcslove_interface =
    {
@@ -26,7 +30,10 @@ jcslove_interface =
 
       length = 0,
 
-      friction = 0,
+      -- Friction each interface
+      friction = 1,
+
+      active = true,
    }
 
 jcslove_interface.__index = jcslove_interface
@@ -54,6 +61,11 @@ end
 ------------------------------------------------
 function jcslove_interface:update(dt)
 
+   if self.active == false then
+      return
+   end
+
+
    for index = 1, self.length do
 
       -- get the current index renderable object
@@ -68,6 +80,10 @@ end
 ------------------------------------------------
 function jcslove_interface:draw()
 
+   if self.active == false then
+      return
+   end
+   
 
    for index = 1, self.length do
 
@@ -82,7 +98,7 @@ end
 -- Add a renderable object into this interface.
 ------------------------------------------------
 -- @param renderObj: object want to be render
---  in this layer of interface.
+-- in this layer of interface.
 ------------------------------------------------
 function jcslove_interface:add(renderObj)
 
@@ -91,5 +107,15 @@ function jcslove_interface:add(renderObj)
 
    -- add the renderable object in to queue
    self.renderObjects[self.length] = renderObj
+
+end
+
+------------------------------------------------
+-- Remove render object fron the interface
+------------------------------------------------
+-- @param renderObj: object want to be render
+-- in this layer of interface.
+------------------------------------------------
+function jcslove_interface:remove(renderObj)
 
 end

@@ -24,6 +24,9 @@ jcslove_camera =
       localX = 0,
       localY = 0,
 
+      recordX = 0,
+      recordY = 0,
+
       -- NOTE(jenchieh): current scene we are rendering
       -- and do the calculation math in order
       -- to simulate the camera movement.
@@ -35,6 +38,7 @@ jcslove_camera =
       -- Multiple Target??
       multiTarget = false,
 
+      velocity = ni,
    }
 
 
@@ -66,6 +70,11 @@ function jcslove_camera.new(init)
    setmetatable(newCamera, jcslove_camera)
 
    newCamera.targets = {}
+   newCamera.velocity =
+      {
+         x = 0,
+         y = 0,
+      }
 
    return newCamera
 end
@@ -85,4 +94,92 @@ function jcslove_camera:update(dt)
       -- Do Single target.
 
    end
+
+   -- Get the current scene and
+   -- check if nil.
+   self.currentScene = jcslove_scenemanager:GetInstance():GetCurrentScene()
+   if self.currentScene == nil then
+      return
+   end
+
+
+   local deltaSpeedX = self.velocity.x * dt
+   local deltaSpeedY = self.velocity.y * dt
+
+   -- real position
+   self.x = self.x + deltaSpeedX
+   self.y = self.y + deltaSpeedY
+
+   -- macro to make camera work
+   self.recordX = self.recordX + deltaSpeedX
+   self.recordY = self.recordY + deltaSpeedY
+
+   for index = 1, self.currentScene.length do
+
+      -- Get the interface in the current
+      -- rendering scene
+      local interface = self.currentScene.interfaces[index]
+
+      local renderObjCounter = 0
+
+      for innerIndex = 1, interface.length do
+         -- get the renderobject in the interface
+         local renderObj = interface.renderObjects[innerIndex]
+
+         -- apply position
+         renderObj.x = renderObj.x - (self.recordX * math.abs(interface.friction))
+         renderObj.y = renderObj.y - (self.recordY * math.abs(interface.friction))
+
+      end -- end innerIndex loop
+
+   end -- end index loop
+
+   -- reset force
+   self.recordX = 0
+   self.recordY = 0
+
+end
+
+------------------------------------------------
+-- Update the graphic layer.
+------------------------------------------------
+function jcslove_camera:draw()
+
+end
+
+------------------------------------------------
+-- Set the camera position
+------------------------------------------------
+-- @param poX: position x
+-- @param poY: position y
+------------------------------------------------
+function jcslove_camera:SetPositionXY(posX, posY)
+
+   local difX = posX - self.x
+   local difY = posY - self.y
+
+   for index = 1, self.currentScene.length do
+
+      -- Get the interface in the current
+      -- rendering scene
+      local interface = self.currentScene.interfaces[index]
+
+      local renderObjCounter = 0
+
+      for innerIndex = 1, interface.length do
+         -- get the renderobject in the interface
+         local renderObj = interface.renderObjects[innerIndex]
+
+         -- apply position
+         renderObj.x = renderObj.x - (difX * math.abs(interface.friction))
+         renderObj.y = renderObj.y - (difY * math.abs(interface.friction))
+
+      end -- end innerIndex loop
+
+   end -- end index loop
+
+   -- set the macros
+   self.x = posX
+   self.y = posY
+
 end

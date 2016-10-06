@@ -13,10 +13,14 @@
 local _PACKAGE = (...):match("^(.+)[%./][^%./]+") or ""
 require (_PACKAGE .. '/jcslove_color')
 require (_PACKAGE .. '/jcslove_sprite')
+require (_PACKAGE .. '/jcslove_animation')
+require (_PACKAGE .. '/jcslove_animator')
 
 
 jcslove_gameobject =
    {
+      name = nil,
+
       shape = nil,
 
       x = 0,    -- x position
@@ -28,7 +32,8 @@ jcslove_gameobject =
       velocity = nil,
 
       sprite = nil,     -- sprite buffer
-      animation = nil,
+      animation = nil,  -- single aniamtion
+      animator = nil,   -- multiple animations
 
       active = true,    -- active or not active
       color = nil
@@ -54,6 +59,10 @@ function jcslove_gameobject.new(init)
          x = 0,
          y = 0,
       }
+   newGameObject.animator = jcslove_animator:new(newGameObject)
+
+   -- set name to the default.
+   newGameObject.name = "GameObject"
 
    return newGameObject
 end
@@ -74,16 +83,18 @@ function jcslove_gameobject:update(dt)
 
    -- do any logic here...
 
-   if self.animation ~= nil then
-      self.animation:update(dt)
-   end
-
-   -- update position and offset.
-   self.shape:update(dt)
-
    -- apply force
    self.x = self.x + (dt * self.velocity.x)
    self.y = self.y + (dt * self.velocity.y)
+
+   -- update animation
+   self.animation:update(dt)
+
+   -- update animator
+   self.animator:update(dt)
+
+   -- update position and offset.
+   self.shape:update(dt)
 end
 
 ------------------------------------------------
@@ -100,9 +111,17 @@ function jcslove_gameobject:draw()
    -- set the current color frame
    self.color:draw()
 
-   -- animation have the higher priority
-   -- to be render.
-   if self.animation.frameCount ~= 0 then
+   if self.animator.length ~= 0 then
+      -- NOTE(jenchieh): "animator" have the
+      -- higher priority to be render.
+
+      -- draw the animator.
+      self.animator:draw()
+
+   elseif self.animation.frameCount ~= 0 then
+      -- NOTE(jenchieh): "animation" have the
+      -- higher priority to be render.
+
       -- draw the animation
       self.animation:draw()
    elseif self.sprite ~= nil then
@@ -232,6 +251,19 @@ end
 ------------------------------------------------
 -- @param tp: type of the shape. (rect/circ)
 ------------------------------------------------
-function jcslove_gameobject:SetShape(tp)
+function jcslove_gameobject:SetShapeType(tp)
    self.shape.shapeType = tp
+
+   if tp ~= "circ" and
+      tp ~= "rect"
+   then
+      jcslove_debug.Error("Set the wrong shape for gameobject...")
+   end
+end
+
+------------------------------------------------
+-- Return the shape
+------------------------------------------------
+function jcslove_gameobject:GetShapeType()
+   return self.shape.shapeType
 end

@@ -7,10 +7,4 @@ $                 Copyright (c) 2016 by Shen, Jen-Chieh $
 ========================================================================
 
 
-* Collision manager
-    - handle all collision in the scene
-* Camera
-* Interface friction
-* Inheritance GameObject
-* Example Games
 * Singleton Pattern in Lua.

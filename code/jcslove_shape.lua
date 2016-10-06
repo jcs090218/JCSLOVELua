@@ -26,9 +26,9 @@ jcslove_shape =
       localX = 0,
       localY = 0,
 
-      width = 10,        -- default: 10
-      height = 10,       -- default: 10
-      radius = 10,       -- default: 10
+      width = 30,        -- default: 30
+      height = 30,       -- default: 30
+      radius = 30,       -- default: 30
 
       shapeType = "rect",   -- type of the shape (rect/circ)
    }
@@ -63,8 +63,6 @@ end
 -- Update graphics
 ------------------------------------------------
 function jcslove_shape:draw()
-
-
 
    -- Don't render the collision if
    -- not in the debug mode.

@@ -11,7 +11,7 @@
 jcslove_debug =
    {
       -- global macros
-      DEBUG = true
+      DEBUG = false,
 
 
    }

@@ -13,24 +13,28 @@ require (_PACKAGE .. '/jcslove_debug')
 require (_PACKAGE .. '/jcslove_math')
 
 
-jcslove_sprite = {
-   x = 0,  -- sprite position x
-   y = 0,  -- sprite position y
+jcslove_sprite =
+   {
+      x = 0,  -- sprite position x
+      y = 0,  -- sprite position y
 
-   width = 0,  -- sprite width
-   height = 0, -- sprite height
+      width = 0,  -- sprite width
+      height = 0, -- sprite height
 
-   pivotX = 0,
-   pivotY = 0,
+      pivotX = 0,
+      pivotY = 0,
 
-   degree = 0,
-   flipX = false,
-   flipY = false,
+      degree = 0,
+      flipX = false,
+      flipY = false,
 
-   gameObject = nil,
+      scaleX = 1,
+      scaleY = 1,
 
-   sprite = nil, -- actual sprite in love 2d
-}
+      gameObject = nil,
+
+      sprite = nil, -- actual sprite in love 2d
+   }
 
 
 
@@ -55,25 +59,25 @@ function jcslove_sprite:draw()
 
    -- check if the sprite exist?
    if self.sprite == nil then
-      jcslove_debug.Informational("No sprite render...")
       return
    end
 
-   local flipValX = 1
-   local flipValY = 1
+
+   local flipValX = self.scaleX
+   local flipValY = self.scaleY
 
    local xVal = self.x
    local yVal = self.y
 
    if self.flipX == true then
-      flipValX = -1
+      flipValX = -self.scaleX
       xVal = -math.abs(xVal)
    else
       xVal = math.abs(xVal)
    end
 
    if self.flipY == true then
-      flipValY = -1
+      flipValY = -self.scaleY
       yVal = -math.abs(yVal)
    else
       yVal = math.abs(yVal)
@@ -118,4 +122,22 @@ end
 function jcslove_sprite:AutoPivot()
    self.pivotX = self.width / 2
    self.pivotY = self.height / 2
+end
+
+------------------------------------------------
+-- Set the scale to X
+------------------------------------------------
+-- @param val: set value
+------------------------------------------------
+function jcslove_sprite:SetScaleX(val)
+   self.scaleX = math.abs(val)
+end
+
+------------------------------------------------
+-- Set the scale to Y
+------------------------------------------------
+-- @param val: set value
+------------------------------------------------
+function jcslove_sprite:SetScaleY()
+   self.scaleY = math.abs(val)
 end

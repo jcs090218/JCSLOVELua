@@ -26,6 +26,8 @@ jcslove_input = {}
 -- declare the tables
 love.keyboard.keysPressed = { }
 love.keyboard.keysReleased = { }
+love.mouse.mousePressed = { }
+love.mouse.mouseReleased = { }
 
 ------------------------------------------------
 --
@@ -63,12 +65,40 @@ function jcslove_input.GetKeyUp(key)
    return false
 end
 
+------------------------------------------------
+-- Get the mouse button
+------------------------------------------------
+function jcslove_input.GetMouseButton(key)
+   return love.mouse.isDown(key)
+end
+
+------------------------------------------------
+-- Get mouse button down/pressed
+------------------------------------------------
+function jcslove_input.GetMouseButtonDown(key)
+   if (love.mouse.mousePressed[key]) then
+      return true
+   end
+
+   return false
+end
+
+------------------------------------------------
+-- Get mouse button up/released
+------------------------------------------------
+function jcslove_input.GetMouseButtonUp(key)
+   if (love.mouse.mouseReleased[key]) then
+      return true
+   end
+
+   return false
+end
 
 ------------------------------------------------
 -- concatenate this to existing love.
 -- keypressed callback, if any
 ------------------------------------------------
---
+-- @param key: key pressed
 ------------------------------------------------
 function love.keypressed(key)
    love.keyboard.keysPressed[key] = true
@@ -78,7 +108,7 @@ end
 -- concatenate this to existing love.
 -- keyreleased callback, if any
 ------------------------------------------------
---
+-- @param key: key release
 ------------------------------------------------
 function love.keyreleased(key)
    love.keyboard.keysReleased[key] = true
@@ -92,4 +122,40 @@ function jcslove_input.ResetKeys()
    -- reset table.
    love.keyboard.keysPressed = { }
    love.keyboard.keysReleased = { }
+end
+
+
+------------------------------------------------
+--
+------------------------------------------------
+-- @param key: mouse pressed
+------------------------------------------------
+function love.mousepressed(x, y, button, istouch)
+   love.mouse.mousePressed[button] = true
+end
+
+------------------------------------------------
+--
+------------------------------------------------
+-- @param key: mouse release
+------------------------------------------------
+function love.mousereleased(x, y, button)
+   love.mouse.mouseReleased[button] = true
+end
+
+------------------------------------------------
+-- Reset mouse buffer from previous frame.
+------------------------------------------------
+function jcslove_input.ResetMouseButton()
+   -- reset table.
+   love.mouse.mousePressed = { }
+   love.mouse.mouseReleased = { }
+end
+
+------------------------------------------------
+-- Reset whole input buffer from previous frame.
+------------------------------------------------
+function jcslove_input.ResetInputBuffer()
+   jcslove_input.ResetKeys()
+   jcslove_input.ResetMouseButton()
 end

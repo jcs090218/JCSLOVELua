@@ -20,6 +20,12 @@ jcslove_scene =
 
       -- name of the scene, in order to do switch scene.
       name = "",
+
+      -- global position
+      x = 0,
+      y = 0,
+
+      active = true,
    }
 
 jcslove_scene.__index = jcslove_scene
@@ -46,6 +52,15 @@ end
 ------------------------------------------------
 function jcslove_scene:update(dt)
 
+   if self.active == false then
+      return
+   end
+
+   -- NOTE(jenchieh): Move the scene
+   -- in order to make the camera work.
+   self:MoveScene(dt)
+
+   -- Update all the interface in the scene.
    for index = 1, self.length do
       self.interfaces[index]:update(dt)
    end
@@ -57,6 +72,11 @@ end
 ------------------------------------------------
 function jcslove_scene:draw()
 
+   if self.active == false then
+      return
+   end
+
+   -- Render all the interface in the scene.
    for index = 1, self.length do
       self.interfaces[index]:draw()
    end
@@ -75,9 +95,6 @@ function jcslove_scene:add(inter)
 
    -- add the renderable object in to queue
    self.interfaces[self.length] = inter
-
-   print(self.interfaces)
-
 end
 
 ------------------------------------------------
@@ -88,4 +105,31 @@ end
 ------------------------------------------------
 function jcslove_scene:remove(inter)
    -- TODO(JenChieh): remove the interface from the array.
+end
+
+------------------------------------------------
+-- Main algorithm how the camera going
+-- to work.
+------------------------------------------------
+-- @param dt: delta time
+------------------------------------------------
+function jcslove_scene:MoveScene(dt)
+
+   -- Do nothing without the camera.
+   local camera = jcslove_camera:GetInstance()
+   if camera == nil then
+      return
+   end
+
+   -- Do the moving algorithm in order
+   -- to make the camera work.
+
+   for index = 1, self.length do
+
+      local interface = self.interfaces[index]
+
+      -- move the interface
+
+   end
+
 end
