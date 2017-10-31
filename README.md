@@ -10,7 +10,7 @@ building the a simple game. <br/><br/>
 switch from one animation to another animation. <br/>
 * Camera System - camera logic implemented with moving the scene in 
 the opposite direction/velocity. <br/>
-* Input System - encapsulate the input buffer to a easy to use API.
+* Input System - encapsulate the input buffer to an easy to use API.
 * Rendering Layer - rendering game object in different interface. <br/>
 * Scene System - simple switch scene system. <br/>
 * Simple Collision detection - AABB, Circle to circle, Rectangle to circle.
