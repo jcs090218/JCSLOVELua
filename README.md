@@ -1,5 +1,7 @@
 # JCSLOVELua #
-<br/>
+
+[![Build Status](https://travis-ci.com/jcs090218/JCSLOVELua_Framework.svg?branch=master)](https://travis-ci.com/jcs090218/JCSLOVELua_Framework)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 JCSLOVELua is a framework provide basic 2D features and structure for
 building the a simple game. <br/><br/>
