@@ -1,7 +1,7 @@
 -- ========================================================================
 -- $File: jcslove_scenemanager.lua $
 -- $Date: 2016-09-16 13:48:05 $
--- $Revision: $
+-- $Revision: 1.3.0 $
 -- $Creator: Jen-Chieh Shen $
 -- $Notice: See LICENSE.txt for modification and distribution information $
 --                   Copyright (c) 2016 by Shen, Jen-Chieh $
@@ -258,7 +258,7 @@ function jcslove_scenemanager:FadeScene(tp, dt)
             -- Reset our camera
             local camera = jcslove_camera:GetInstance()
             camera:SetPositionXY(0, 0)
-            
+
          end
 
       end

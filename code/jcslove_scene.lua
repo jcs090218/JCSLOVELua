@@ -1,7 +1,7 @@
 -- ========================================================================
 -- $File: jcslove_scene.lua $
 -- $Date: 2016-09-16 13:27:11 $
--- $Revision: $
+-- $Revision: 1.3.0 $
 -- $Creator: Jen-Chieh Shen $
 -- $Notice: See LICENSE.txt for modification and distribution information $
 --                   Copyright (c) 2016 by Shen, Jen-Chieh $

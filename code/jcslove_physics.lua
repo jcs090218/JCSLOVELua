@@ -1,7 +1,7 @@
 -- ========================================================================
 -- $File: jcslove_physics.lua $
 -- $Date: 2016-09-25 16:00:53 $
--- $Revision: $
+-- $Revision: 1.3.0 $
 -- $Creator: Jen-Chieh Shen $
 -- $Notice: See LICENSE.txt for modification and distribution information $
 --                   Copyright (c) 2016 by Shen, Jen-Chieh $
