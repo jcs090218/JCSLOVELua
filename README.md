@@ -7,7 +7,7 @@
 
 JCSLOVELua is a framework provide basic 2D features and structure for building
 the a simple game.
-c
+
 ## Feature
 
 * Animation System - render animation frame by frame control by time.
