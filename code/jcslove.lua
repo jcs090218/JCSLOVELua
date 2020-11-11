@@ -45,7 +45,7 @@ require (_PACKAGE .. '/jcslove_animator')
 -- Global initialize function for framework
 ------------------------------------------------
 function jcslove.init()
-   jcslove_window.SetTitle("JCSLOVELua_Framework")
+   jcslove_window.SetTitle("JCSLOVELua")
 
    -- make the time random
    math.randomseed(os.time())
@@ -54,5 +54,4 @@ function jcslove.init()
    -- preferences decision.
    jcslove_window.Resizable(false)
    jcslove_window.SetScreenSize(1280, 720)
-
 end
