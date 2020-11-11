@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/jcs090218/JCSLOVELua_Framework.svg?branch=master)](https://travis-ci.com/jcs090218/JCSLOVELua_Framework)
 [![LÖVE](https://img.shields.io/badge/L%C3%96VE-0.10.2-olive.svg)](https://love2d.org/)
+[![Release Tag](https://img.shields.io/github/tag/JCSLOVELua/JCSUnity.svg?label=release)](https://github.com/jcs090218/JCSLOVELua/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # JCSLOVELua
