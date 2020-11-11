@@ -1,30 +1,35 @@
-========================================================================
-$File: Update_Log.txt $
-$Creator: Jen-Chieh Shen <jcs090218@gmail.com> $
-$Date: 2016-09-14 $
-$Notice: See LICENSE.txt for modification and distribution information
-                  Copyright (c) 2016 by Shen, Jen-Chieh $
-========================================================================
+# Change Log
+
+All notable changes to this project will be documented in this file.
+
+Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 
-2016-10-01
+### 2016-10-01
+
 * jcslove_camera implemented. (jcslove)
 * jcslove_util updated. (jcslove)
 * jcslove_interface updated, friction function implemented. (jcslove)
 
-2016-09-30
+### 2016-09-30
+
 *jcslove_soundmanager implemented. (jcslove)
 
-2016-09-28
+### 2016-09-28
+
 * jcslove_collisionmanager implemented. (jcslove)
 
-2016-09-26
+### 2016-09-26
+
 * jcslove_physic implemented. (jcslove)
 * jcslove_animator implemented. (jcslove)
 
-2016-09-19
+### 2016-09-19
+
 * jcslove_input implemented. (jcslove)
 * jcslove_scenemanager implemented. (jcslove)
 
-2016-09-17
+### 2016-09-17
+
 * Switch Scene system. (jcslove)
+
