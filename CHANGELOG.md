@@ -7,29 +7,28 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### 2016-10-01
 
-* jcslove_camera implemented. (jcslove)
-* jcslove_util updated. (jcslove)
-* jcslove_interface updated, friction function implemented. (jcslove)
+* jcslove_camera implemented.
+* jcslove_util updated.
+* jcslove_interface updated, friction function implemented.
 
 ### 2016-09-30
 
-*jcslove_soundmanager implemented. (jcslove)
+*jcslove_soundmanager implemented.
 
 ### 2016-09-28
 
-* jcslove_collisionmanager implemented. (jcslove)
+* jcslove_collisionmanager implemented.
 
 ### 2016-09-26
 
-* jcslove_physic implemented. (jcslove)
-* jcslove_animator implemented. (jcslove)
+* jcslove_physic implemented.
+* jcslove_animator implemented.
 
 ### 2016-09-19
 
-* jcslove_input implemented. (jcslove)
-* jcslove_scenemanager implemented. (jcslove)
+* jcslove_input implemented.
+* jcslove_scenemanager implemented.
 
 ### 2016-09-17
 
-* Switch Scene system. (jcslove)
-
+* Switch Scene system.
