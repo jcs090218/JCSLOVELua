@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.com/jcs090218/JCSLOVELua.svg?branch=master)](https://travis-ci.com/jcs090218/JCSLOVELua)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![LÖVE](https://img.shields.io/badge/L%C3%96VE-0.10.2-olive.svg)](https://love2d.org/)
-[![Release Tag](https://img.shields.io/github/tag/jcs090218/JCSLOVELua.svg?label=release)](https://github.com/jcs090218/JCSLOVELua/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/tag/jcs090218/JCSLOVELua.svg?label=release&logo=github)](https://github.com/jcs090218/JCSLOVELua/releases/latest)
 
 # JCSLOVELua
+
+[![Build Status](https://travis-ci.com/jcs090218/JCSLOVELua.svg?branch=master)](https://travis-ci.com/jcs090218/JCSLOVELua)
 
 JCSLOVELua is a framework provide basic 2D features and structure for building
 the a simple game.
